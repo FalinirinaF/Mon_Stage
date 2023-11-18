@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Source, UserIncome
+from .models import Source
 from django.core.paginator import Paginator
 from userpreferences.models import UserPreference
 from django.contrib import messages
@@ -8,6 +8,15 @@ import json
 from django.http import JsonResponse
 import datetime
 from django.http import JsonResponse  # Assurez-vous d'importer correctement votre modèle
+from .models import  UserIncome
+from django.core.paginator import Paginator
+import json
+from django.http import JsonResponse
+from userpreferences.models import UserPreference
+from django.contrib.auth.models import User
+import datetime
+
+
 
 # Create your views here.
 
@@ -141,23 +150,23 @@ def delete_income(request, id):
 def income_source_summary(request):
     todays_date = datetime.date.today()
     six_months_ago = todays_date-datetime.timedelta(days=30*6)
-    income = UserIncome.objects.filter(owner=request.user,
+    incomes = UserIncome.objects.filter(owner=request.user,
                                       date__gte=six_months_ago, date__lte=todays_date)
     finalrep = {}
 
     def get_source(income):
         return income.source
-    source_list = list(set(map(get_source, income)))
+    source_list = list(set(map(get_source, incomes)))
 
     def get_income_source_summary(source):
         age = 0
-        filtered_by_source = income.filter(source=source)
+        filtered_by_source = incomes.filter(source=source)
 
         for item in filtered_by_source:
             age += item.age
         return age
 
-    for x in income:
+    for x in incomes:
         for y in source_list:
             finalrep[y] = get_income_source_summary(y)
 
