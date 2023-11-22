@@ -7,8 +7,8 @@ from django.utils.timezone import now
 
 class UserIncome(models.Model):
     amount = models.FloatField()  # DECIMAL
-    im = models.FloatField()
-    nom = models.TextField()
+    im = models.IntegerField(default=0)
+    nom = models.TextField(default="")
     date = models.DateField(default=now)
     description = models.TextField()
     age = models.FloatField()
