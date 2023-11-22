@@ -1,7 +1,7 @@
 const searchField = document.querySelector("#searchField");
 
 const tableOutput = document.querySelector(".table-output");
-const appTable = document.querySelector(".app-table");
+const appTable = document.querySelector("#expe");
 const paginationContainer = document.querySelector(".pagination-container");
 tableOutput.style.display = "none";
 const noResults = document.querySelector(".no-results");
@@ -36,6 +36,7 @@ searchField.addEventListener("keyup", (e) => {
                 <td>${item.amount}</td>
                 <td>${item.category}</td>
                 <td>${item.description}</td>
+                <td>${item.vendu}</td>
                 <td>${item.date}</td>
                 </tr>`;
           });

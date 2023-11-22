@@ -9,7 +9,7 @@ class Expense(models.Model):
     amount = models.FloatField()
     date = models.DateField(default=now)
     description = models.TextField()
-    vendu = models.FloatField()
+    vendu = models.IntegerField(default=0)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     category = models.CharField(max_length=266)
 

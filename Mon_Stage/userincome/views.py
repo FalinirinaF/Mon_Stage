@@ -12,7 +12,7 @@ from .models import  UserIncome
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
-from userpreferences.models import UserPreference
+from .models import Source
 from django.contrib.auth.models import User
 import datetime
 
@@ -146,7 +146,7 @@ def delete_income(request, id):
     income.delete()
     messages.success(request, 'record removed')
     return redirect('income')
-
+"""
 def income_source_summary(request):
     todays_date = datetime.date.today()
     six_months_ago = todays_date-datetime.timedelta(days=30*6)
@@ -173,6 +173,16 @@ def income_source_summary(request):
     return JsonResponse({'income_source_data': finalrep}, safe=False)
 
 
+"""
+def income_source_summary(request):
+    labels = []
+    data = []
+    
+    source = Source.objects.order_by('-age')[:5]
+    for source in source:
+        labels.append(source.source)
+        data.append(source.age)
+    return render(request, 'statist.html', {'labels': labels, 'data': data})
 
 def statist_view(request):
     return render(request, 'income/statist.html')

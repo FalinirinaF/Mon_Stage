@@ -7,11 +7,11 @@ from django.utils.timezone import now
 
 class UserIncome(models.Model):
     amount = models.FloatField()  # DECIMAL
-    im = models.FloatField()
-    nom = models.TextField()
+    im = models.IntegerField(default=0)
+    nom = models.TextField(default="")
     date = models.DateField(default=now)
     description = models.TextField()
-    age = models.FloatField()
+    age = models.IntegerField(default=0)
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
     source = models.CharField(max_length=266)
 

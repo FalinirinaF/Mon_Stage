@@ -25,17 +25,34 @@
 
   </div>
 
- <div class="row">
-<div class="col-md-7">
- <canvas id="myChart" width="400" height="390"></canvas>
-    </div><div class="col-md-4">
-    </div>
-
- </div>
-</div>
-
-<script src="{% static '/js/statist.js' %}"></script>
-
-</script>
+  <div class="col-md-7">
+    <canvas id="myChart" width="400" height="100"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
 
 {% endblock content %}
